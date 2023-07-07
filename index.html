@@ -7,17 +7,20 @@
     <title>JS Quiz</title>
 </head>
 <body>
-   <h1 class="time">JavaScript Quiz</h1>
-    <section class="container">
-        <section id="quiz">
-            <section id="main"></section>
-            <button>Answer 1</button>
-            <button>Answer 2</button>
-            <button>Answer 3</button>
-            <button>Answer 4</button>
+  <header><h1 class="time">JavaScript Quiz</h1></header>
+  <main> 
+    <section class="scoreboard"></section>
+        <Section class="scoreboard_score--correct">Correct: <span class-"scoreboard_score_value>5</span></Section>
+        <Section class="scoreboard_score--incorrect">Incorrect: <span class-"scoreboard_score_value>3</span></Section>
+  <section class="gameboard">
+            <section class="gameboard_result">You Win</section>
+            <section class="gameboard_display">_ _ _ _ _</section>
+            <section class="gameboard_timer">60</section>
         </section>
+        <section class="controls"></section>
+        <button class="controls_playgame">Start Game</button>
     </section>
-    
+    </main>
     <script src="./script.js"></script>
 </body>
 </html>
