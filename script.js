@@ -44,14 +44,14 @@ let questions = [
 function showQuestions(question, selections) {
 
     let gameQuestion = document.createTextNode(question)
-    document.getElementById('.display').appendChild(gameQuestion); /* phind shows single quotes not double for selecting by ID */
+    document.getElementById("display").appendChild(gameQuestion); 
     
     for (let i=0; i < selections.length; i++) {
         const liTag = document.createElement('li');
         const textNode = document.createTextNode(selections[i])
         li.appendChild(textNode);
         li.addEventListener("click", userChoice);
-        document.getElementById("userSelection").appendChild(li);
+        document.getElementById("userSelection").appendChild(liTag);
     }
     
     
@@ -84,7 +84,7 @@ function userChoice() {
 }
 
 function startTest() { /* called by the event handler click */
-    // showQuestions(questions[currentQuestion].question, questions[currentQuestion.selections]);
+    showQuestions(questions[userQuestion].question, questions[userQuestion.selections]);
     countDown(); /* calls the countdown function to start ticking */
     showQuestions(); /* calls the game questions to populate */
 }
