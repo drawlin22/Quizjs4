@@ -1,11 +1,10 @@
 
-let timeLeft = 5;
-let userQuestion = 0;
+let timeLeft = 25;
+let questionIndex = 0;
 
 /* State Variables */
 let answeredCorrect = 0;
 let answeredIncorrect = 0;
-let timer = 0; /*object */
 
 let questions = [
     {
@@ -41,52 +40,53 @@ let questions = [
     
 ];
 
-function showQuestions(question, selections) {
-
-    let gameQuestion = document.createTextNode(question)
+function showQuestions(currentQuestion) {
+    document.getElementById("display").innerHTML="";
+    document.getElementById("userSelection").innerHTML="";
+    console.log(currentQuestion)
+    let gameQuestion = document.createTextNode(currentQuestion.question)
     document.getElementById("display").appendChild(gameQuestion); 
     
-    for (let i=0; i < selections.length; i++) {
-        const liTag = document.createElement('li');
-        const textNode = document.createTextNode(selections[i])
-        li.appendChild(textNode);
-        li.addEventListener("click", userChoice);
+    for (let i=0; i < currentQuestion.selections.length; i++) {
+        const liTag = document.createElement('button');
+        const textNode = document.createTextNode(currentQuestion.selections[i])
+        liTag.appendChild(textNode);
+        liTag.addEventListener("click", userChoice);
         document.getElementById("userSelection").appendChild(liTag);
+        
     }
-    
-    
-    
-    
-    
-    
-    // let ulTag = document.createElement("ol"); /* create the ordered list element */
-    // let liTag1 = document.createElement(li);
-    // let liTag2 = document.createElement(li);
-    // let liTag3 = document.createElement(li);
-    // let liTag4 = document.createElement(li);
-    
-    // liTag1.textContent = questions[0].selections[0];
-    // liTag2.textContent = questions[0].selections[1];
-    // liTag3.textContent = questions[0].selections[2];
-    // liTag4.textContent = questions[0].selections[3];
-    
-    // gameDisplay.appendChild(ulTag);
-    // ulTag.appendChild(liTag1)
-    // ulTag.appendChild(liTag1)
-    // ulTag.appendChild(liTag3)
-    // ulTag.appendChild(liTag4)
-    
+}    
+     
+function userCorrect() {
+answeredCorrect++ /* Correct tally is increased by 1 for correct answer */
 
-        }
+}
 
-function userChoice() {
+function userIncorrect() {
+answeredIncorrect++ /* Incorrect tally is increased by 1 for incorrect answer */
+timeLeft -= 5; /* time is decremented by 5 seconds for incorrect choice */
+}
+
+function userChoice(event) {
+   let userChoice = event.target.textContent /* user choice is the target of the click */
+    let correctChoice = questions[questionIndex].correct;
+    if (userChoice === correctChoice) {
+        userCorrect() /* if the correct choice is made them the userCorrect function is called */
+    }else {
+        userIncorrect() /* if the incorrect choice is made them the userIncorrect function is called */
+    }
+    updateScore()
+    questionIndex++
+    showQuestions(questions[questionIndex]);
+
+    console.log(userChoice) 
 
 }
 
 function startTest() { /* called by the event handler click */
-    showQuestions(questions[userQuestion].question, questions[userQuestion.selections]);
+    showQuestions(questions[questionIndex]);
     countDown(); /* calls the countdown function to start ticking */
-    showQuestions(); /* calls the game questions to populate */
+//     showQuestions(); /* calls the game questions to populate */
 }
 
 
@@ -108,11 +108,11 @@ var timeInterval = setInterval (function () {
 
 
 function updateScore () {
-    let answeredCorrect = document.getElementById('answeredCorrectly');
-    let answeredIncorrect = document.getElementById('answeredIncorrectly');
+    let correct = document.getElementById('answeredCorrectly');
+    let incorrect = document.getElementById('answeredIncorrectly');
 
-    answeredCorrect=0;
-    answeredIncorrect=0;
+    correct.textContent = "correct: " + answeredCorrect
+    incorrect.textContent = "incorrect: " + answeredIncorrect
 }
 
 

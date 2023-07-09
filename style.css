@@ -33,6 +33,12 @@ body {
     box-shadow: 4px 4px 0 0 gray;
     
 }
+
+h2 {
+    background-color: var(--background);
+    text-align: center;
+    color: red;
+}
    
 section {
     background-color: var(--background);
@@ -41,6 +47,20 @@ section {
 button {
     background-color: lightgray;
     margin-bottom: 10px;
+    display: block;
+   
+}
+
+p {
+    background-color: var(--background);
+}
+
+ul {
+    background-color: var(--background);
+}
+
+li {
+    background-color: var(--background);
 }
 
 .timer {
@@ -52,7 +72,10 @@ button {
     display: inline-block;
     margin-left: 25px;
     margin-right: 25px;
+    margin-bottom: 25px;
 }
+
+
 
 @media screen and (max-width: 972px) {
     
