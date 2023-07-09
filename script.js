@@ -1,35 +1,11 @@
 
 let timeLeft = 5;
-
+let userQuestion = 0;
 
 /* State Variables */
 let answeredCorrect = 0;
 let answeredIncorrect = 0;
 let timer = 0; /*object */
-
-function showQuestions() {
-let gameDisplay = document.getElementById('.display'); /* phind shows single quotes not double for selecting by ID */
-let ulTag = document.createElement("ol"); /* create the ordered list element */
-let liTag1 = document.createElement(li);
-let liTag2 = document.createElement(li);
-let liTag3 = document.createElement(li);
-let liTag4 = document.createElement(li);
-
-liTag1.textContent = /*Selections */
-liTag2.textContent = /*Selections */
-liTag3.textContent = /*Selections */
-liTag4.textContent = /*Selections */
-
-ulTag.appendChild(gameDisplay);
-gameDisplay.appendChild(liTag1)
-gameDisplay.appendChild(liTag1)
-gameDisplay.appendChild(liTag3)
-gameDisplay.appendChild(liTag4)
-
-for (let i=0; i < questions.length; i++) {
-
-}
-    }
 
 let questions = [
     {
@@ -65,7 +41,56 @@ let questions = [
     
 ];
 
-function countDown() {
+function showQuestions(question, selections) {
+
+    let gameQuestion = document.createTextNode(question)
+    document.getElementById('.display').appendChild(gameQuestion); /* phind shows single quotes not double for selecting by ID */
+    
+    for (let i=0; i < selections.length; i++) {
+        const liTag = document.createElement('li');
+        const textNode = document.createTextNode(selections[i])
+        li.appendChild(textNode);
+        li.addEventListener("click", userChoice);
+        document.getElementById("userSelection").appendChild(li);
+    }
+    
+    
+    
+    
+    
+    
+    // let ulTag = document.createElement("ol"); /* create the ordered list element */
+    // let liTag1 = document.createElement(li);
+    // let liTag2 = document.createElement(li);
+    // let liTag3 = document.createElement(li);
+    // let liTag4 = document.createElement(li);
+    
+    // liTag1.textContent = questions[0].selections[0];
+    // liTag2.textContent = questions[0].selections[1];
+    // liTag3.textContent = questions[0].selections[2];
+    // liTag4.textContent = questions[0].selections[3];
+    
+    // gameDisplay.appendChild(ulTag);
+    // ulTag.appendChild(liTag1)
+    // ulTag.appendChild(liTag1)
+    // ulTag.appendChild(liTag3)
+    // ulTag.appendChild(liTag4)
+    
+
+        }
+
+function userChoice() {
+
+}
+
+function startTest() { /* called by the event handler click */
+    // showQuestions(questions[currentQuestion].question, questions[currentQuestion.selections]);
+    countDown(); /* calls the countdown function to start ticking */
+    showQuestions(); /* calls the game questions to populate */
+}
+
+
+function countDown() { /* Called from the startTest function */
    
 var timeInterval = setInterval (function () {
     let timerEl = document.getElementById('timer');
@@ -92,7 +117,7 @@ function updateScore () {
 
 
 let startBtn = document.querySelector(".btn");
-startBtn.addEventListener("click", countDown); /* once the even 'click' button is heard then the countdown function is called. */ 
+startBtn.addEventListener("click", startTest); /* once the even 'click' button is heard then the startTest function is called. */ 
 
 
 function endGame () {
