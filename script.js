@@ -1,200 +1,101 @@
-let timeEl = document.querySelector(".gameboard_timer");
-let winsEl = document.querySelector(".scoreboard_score_value--correct");
-let lossesEl = document.querySelector(".scoreboard_score_value--incorrect");
-let timerEL = document.querySelector(".gameboard_timer");
-let gameResultEl = document.querySelector(".gameboard_result");
-let gameDisplayEl = document.querySelector(".game_display");
-let controlsEl = document.querySelector(".controls");
-let startGameButtonEl = document.querySelector("controls_playgame");
 
+let timeLeft = 5;
 
 
 /* State Variables */
-let correct = 0;
-let incorrect = 0;
-let timer = null; /*object */
-let timeLeft = 0
-let currentQuestionIndex;
-let selections;
+let answeredCorrect = 0;
+let answeredIncorrect = 0;
+let timer = 0; /*object */
 
+function showQuestions() {
+let gameDisplay = document.getElementById('.display'); /* phind shows single quotes not double for selecting by ID */
+let ulTag = document.createElement("ol"); /* create the ordered list element */
+let liTag1 = document.createElement(li);
+let liTag2 = document.createElement(li);
+let liTag3 = document.createElement(li);
+let liTag4 = document.createElement(li);
 
-/* Constants */
-const questions= [
-    {
-        question: "1. What does API Stand for?"
-        selections: "Application Programming Interface", "Accessory Programming Interface", "Application Programming index", "Accessory Programming Index", "Application Planning Interface"
-        correct: "Application Programming Interface"
-    },
+liTag1.textContent = /*Selections */
+liTag2.textContent = /*Selections */
+liTag3.textContent = /*Selections */
+liTag4.textContent = /*Selections */
 
-    {
-        question: "2. Which of the following is not a primitive data type?"
-        selections: "Boolean", "Object", "String", "Number", "Symbol"
-        correct: "Object"
-    },
+ulTag.appendChild(gameDisplay);
+gameDisplay.appendChild(liTag1)
+gameDisplay.appendChild(liTag1)
+gameDisplay.appendChild(liTag3)
+gameDisplay.appendChild(liTag4)
 
-    {
-        question: "3. Which of the following is not and event in javascript?"
-        selections: "onclick", "Offline", "keydown", "onaround", "onabort"
-        correct: "onaround"
-    },
+for (let i=0; i < questions.length; i++) {
 
-    {
-        question: "4. What does HTML stand for?"
-        selections:"Hyper Text Markup Location", "Hyper Text Markdown Language", "Hyper Text Markup Language", "Hyper Text Markup Location"
-        correct: "Hyper Text markup Language"
-    },
-
-    {
-        question: "5. What does DOM stand for?"
-        selections: "Data Object Model ","Document Object Model"
-        correct: "Document Object Model"
-    },
-
-    {
-        question: "6. What is the status of a webpage or an object called?"
-        selections: "Static", "Summary", "State", "Solid"
-        correct: "State"
-    },
-
-    {
-        question: "7."
-        selections:
-        correct:
-    },
-
-    {
-        question: "8."
-        selections:
-        correct:
-    },
-
-    {
-        question: "9."
-        selections:
-        correct:
-    },
-
-    {
-        question: "10."
-        selections:
-        correct: 
+}
     }
+
+let questions = [
+    {
+        question: "1. What does API Stand for?",
+        selections: ["Application Programming Interface", "Accessory Programming Interface", "Application Programming index", "Accessory Programming Index", "Application Planning Interface"],
+        correct: "Application Programming Interface",
+    },
+
+    {
+        question: "2. Which of the following is not a primitive data type?",
+        selections: ["Boolean", "Object", "String", "Number", "Symbol"],
+        correct: "Object",
+    },
+
+    {
+        question: "3. Which of the following is not and event in javascript?",
+        selections: ["onclick", "Offline", "keydown", "onaround", "onabort"],
+        correct: "onaround",
+    },
+
+    {
+        question: "4. What does HTML stand for?",
+        selections: ["Hyper Text Markup Location", "Hyper Text Markdown Language", "Hyper Text Markup Language", "Hyper Text Markup Location"],
+        correct: "Hyper Text markup Language",
+    },
+
+    {
+        question: "5. What does DOM stand for?",
+        selections: ["Data Object Model ","Document Object Model"],
+        correct: "Document Object Model",
+    },
+
     
 ];
 
-var duration = 150;
-
-
-/* Events */
-
-/* page load */
-function init () {}
-console.log("game loading...")
-
-// click start button
-function start(event) {
-    console.log("Game started");
-}
-startGameButtonEl.addEventListener("click", start);
-
-
-// timer tick
-
-function timertick(event) {
-    console.log "timer ticked";
-}
-
-// answer selection (type a letter)
-
-function selection(event) {
-    console.log "answer picked"
-}
-document.addEventListener("click", selections);
-
-// game end
-
-function gameEnd(event) {
+function countDown() {
+   
+var timeInterval = setInterval (function () {
+    let timerEl = document.getElementById('timer');
+    if (timeLeft >= 0) { /* while time is greater than 0 it is decreased by 1 second*/
+        timerEl.textContent = timeLeft 
+        timeLeft--;
+    } else { /* once the time runs outs, clock stops and endGame function is called */
+        timerEl.textContent = '';
+        clearInterval(timeInterval);
+        endGame()
+    }
+}, 1000);
 
 }
 
 
+function updateScore () {
+    let answeredCorrect = document.getElementById('answeredCorrectly');
+    let answeredIncorrect = document.getElementById('answeredIncorrectly');
 
-/* refactor */
-
-
-/* start the game */
-init();
-
-
-
+    answeredCorrect=0;
+    answeredIncorrect=0;
+}
 
 
+let startBtn = document.querySelector(".btn");
+startBtn.addEventListener("click", countDown); /* once the even 'click' button is heard then the countdown function is called. */ 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let MainEl = document.getElementById('main');
-
-
-// function countdown() { /* timer that counts down */
-//     let secondsLeft = 150;
-    
-
-//     let timeInterval = setInterval (function() {
-    
-//     if (secondsLeft > 0) { /* as long as more than 1 sec remainers timer is decremended */
-      
-//     timeEl.textContent = secondsLeft + 'seconds left' 
-       
-//     secondsLeft--;
-//     } else if (secondsLeft === 1) {
-
-//         timeEl.textContent = secondsLeft = "second left"
-//         secondsLeft--;
-//     } else { /* if timer hits 0 then timer is cleared and send message function is called */
-      
-//     timeEl.textContent = ""
-    
-//     clearInterval(timerInterval);
-    
-//     sendMessage();
-//     }
-// }, 1000);
-// }
-
-
-// function sendMessage() {
-//     timeEl.textContent = "";
-//     let imgEl = document.createElement("img");
-//     imgEl.setAttribute("src", "images/image_1.jpg") /*insert image path "" */
-//     MainEl.apendChild(imgEl);
-
-// }
-
-
-
-// const quiz = document.querySelector("quiz")
-
-// questions.array.forEach(question, index => {
-    
-// });
+function endGame () {
+    updateScore() /* once endGame function is triggered updateScore function is called */
+console.log ("game over")
+}
