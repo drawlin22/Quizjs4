@@ -39,6 +39,11 @@ h2 {
     text-align: center;
     color: red;
 }
+
+h3 {
+    background-color: var(--background);
+    text-align: center;
+}
    
 section {
     background-color: var(--background);
@@ -57,10 +62,18 @@ p {
 
 ul {
     background-color: var(--background);
+   
+}
+
+ol{ 
+    background-color: var(--background);
+    text-align: center;
+   list-style: inside;
 }
 
 li {
     background-color: var(--background);
+    text-align: center;
 }
 
 .timer {

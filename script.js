@@ -1,5 +1,5 @@
 
-let timeLeft = 25;
+let timeLeft = 50;
 let questionIndex = 0;
 
 /* State Variables */
@@ -33,17 +33,15 @@ let questions = [
 
     {
         question: "5. What does DOM stand for?",
-        selections: ["Data Object Model ","Document Object Model"],
+        selections: ["Data Object Model ","Document Object Model", "Dell Object Model", "Delta Object Model"],
         correct: "Document Object Model",
     },
 
-    
 ];
 
 function showQuestions(currentQuestion) {
     document.getElementById("display").innerHTML="";
     document.getElementById("userSelection").innerHTML="";
-    console.log(currentQuestion)
     let gameQuestion = document.createTextNode(currentQuestion.question)
     document.getElementById("display").appendChild(gameQuestion); 
     
@@ -57,14 +55,14 @@ function showQuestions(currentQuestion) {
     }
 }    
      
-function userCorrect() {
+function userCorrect() { /*called by the userChoice event */
 answeredCorrect++ /* Correct tally is increased by 1 for correct answer */
 
 }
 
-function userIncorrect() {
+function userIncorrect() { /*called by the userChoice event */
 answeredIncorrect++ /* Incorrect tally is increased by 1 for incorrect answer */
-timeLeft -= 5; /* time is decremented by 5 seconds for incorrect choice */
+timeLeft -= 15; /* time is decremented by 5 seconds for incorrect choice */
 }
 
 function userChoice(event) {
@@ -75,12 +73,9 @@ function userChoice(event) {
     }else {
         userIncorrect() /* if the incorrect choice is made them the userIncorrect function is called */
     }
-    updateScore()
+    // updateScore()
     questionIndex++
     showQuestions(questions[questionIndex]);
-
-    console.log(userChoice) 
-
 }
 
 function startTest() { /* called by the event handler click */
@@ -117,10 +112,47 @@ function updateScore () {
 
 
 let startBtn = document.querySelector(".btn");
-startBtn.addEventListener("click", startTest); /* once the even 'click' button is heard then the startTest function is called. */ 
+let h3 = document.querySelector(".h3")
+let l1 = document.querySelector(".l1")
+let l2 = document.querySelector(".l2")
+let l3 = document.querySelector(".l3")
+startBtn.addEventListener("click", startTest) 
+startBtn.addEventListener("click", () => {
+    startBtn.style.display = 'none';
+   });
+ startBtn.addEventListener("click", () => {
+    h3.style.display = 'none';
+ })  ;
+ startBtn.addEventListener("click", () => {
+    l1.style.display = 'none';
+ })  ;
+ startBtn.addEventListener("click", () => {
+    l2.style.display = 'none';
+ })  ;
+ startBtn.addEventListener("click", () => {
+    l3.style.display = 'none';
+ })  ;
+   
+   /* once the event 'click' button is heard then the startTest function is called. */ 
 
+    const noHighScores = 10;
+    const HIGHSCORES = 'highScores';
+    const highScoreString = localStorage.getItem(HIGHSCORES);
+    const highScores = JSON.parse(highScoreString)??[];
+    const lowestScore = highScores[noHighScores-1]?.score ?? 0;
 
 function endGame () {
     updateScore() /* once endGame function is triggered updateScore function is called */
-console.log ("game over")
+    
+    
+    function highScorefunc() { /*michael-karen.medium.com */
+        const highScore = JSON.parse(localStorage.getItem(HIGHSCORES)) ?? [];
+        const lowestScore = highScore[highScores-1]?.score ?? 0;
+
+        if (score > lowestScore) {
+            saveHighScore(score, highScores);
+        const name = prompt('You got a high score! Enter your name: ')    
 }
+    }
+};
+
