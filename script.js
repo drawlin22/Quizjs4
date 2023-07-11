@@ -87,13 +87,13 @@ function startTest() { /* called by the event handler click */
 
 function countDown() { /* Called from the startTest function */
    
-var timeInterval = setInterval (function () {
+let timeInterval = setInterval (function () {
     let timerEl = document.getElementById('timer');
     if (timeLeft >= 0) { /* while time is greater than 0 it is decreased by 1 second*/
         timerEl.textContent = timeLeft 
         timeLeft--;
     } else { /* once the time runs outs, clock stops and endGame function is called */
-        timerEl.textContent = '';
+        // timerEl.textContent = ''; /*add alert for time out */
         clearInterval(timeInterval);
         endGame()
     }
@@ -135,24 +135,17 @@ startBtn.addEventListener("click", () => {
    
    /* once the event 'click' button is heard then the startTest function is called. */ 
 
-    const noHighScores = 10;
-    const HIGHSCORES = 'highScores';
-    const highScoreString = localStorage.getItem(HIGHSCORES);
-    const highScores = JSON.parse(highScoreString)??[];
-    const lowestScore = highScores[noHighScores-1]?.score ?? 0;
 
 function endGame () {
     updateScore() /* once endGame function is triggered updateScore function is called */
-    
-    
+    highScorefunc()
+}
     function highScorefunc() { /*michael-karen.medium.com */
         const highScore = JSON.parse(localStorage.getItem(HIGHSCORES)) ?? [];
         const lowestScore = highScore[highScores-1]?.score ?? 0;
 
-        if (score > lowestScore) {
-            saveHighScore(score, highScores);
-        const name = prompt('You got a high score! Enter your name: ')    
-}
-    }
+    
 };
+    
+
 
