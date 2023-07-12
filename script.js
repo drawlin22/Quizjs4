@@ -1,6 +1,8 @@
 
-let timeLeft = 50;
+let timeLeft = 80;
 let questionIndex = 0;
+let timeInterval;
+
 
 /* State Variables */
 let answeredCorrect = 0;
@@ -39,8 +41,18 @@ let questions = [
 
 ];
 
+let input = document.getElementById("input")
+let submit = document.getElementById("submit")
+    input.style.display = 'none';
+    submit.style.display = 'none';
+
 function showQuestions(currentQuestion) {
-    document.getElementById("display").innerHTML="";
+    // if (questionIndex === questions.length) {
+    //     return;
+    
+    // }
+    
+    try { document.getElementById("display").innerHTML="";
     document.getElementById("userSelection").innerHTML="";
     let gameQuestion = document.createTextNode(currentQuestion.question)
     document.getElementById("display").appendChild(gameQuestion); 
@@ -53,6 +65,10 @@ function showQuestions(currentQuestion) {
         document.getElementById("userSelection").appendChild(liTag);
         
     }
+}
+   catch (e){
+    console.log("index Out of Range")
+   }
 }    
      
 function userCorrect() { /*called by the userChoice event */
@@ -75,6 +91,9 @@ function userChoice(event) {
     }
     // updateScore()
     questionIndex++
+    if (questionIndex === questions.length) {
+        endGame()
+    }
     showQuestions(questions[questionIndex]);
 }
 
@@ -87,10 +106,10 @@ function startTest() { /* called by the event handler click */
 
 function countDown() { /* Called from the startTest function */
    
-let timeInterval = setInterval (function () {
+    timeInterval = setInterval (function () {
     let timerEl = document.getElementById('timer');
     if (timeLeft >= 0) { /* while time is greater than 0 it is decreased by 1 second*/
-        timerEl.textContent = timeLeft 
+        timerEl.textContent = "Time Remaining: " + timeLeft 
         timeLeft--;
     } else { /* once the time runs outs, clock stops and endGame function is called */
         // timerEl.textContent = ''; /*add alert for time out */
@@ -101,13 +120,50 @@ let timeInterval = setInterval (function () {
 
 }
 
-
 function updateScore () {
+  clearInterval(timeInterval);
     let correct = document.getElementById('answeredCorrectly');
     let incorrect = document.getElementById('answeredIncorrectly');
+    let highScore = document.querySelector(".highScore")
+    // let winner = timeLeft + answeredCorrect
+   
 
     correct.textContent = "correct: " + answeredCorrect
     incorrect.textContent = "incorrect: " + answeredIncorrect
+
+    input.style.display = 'block';
+    submit.style.display = 'block';
+
+    submit.addEventListener("click", highScorefunc)
+    event.preventDefault()
+
+    function highScorefunc(event) {
+        event.preventDefault()
+        let input = document.getElementById("input")
+        let getStudent = JSON.parse(localStorage.getItem("scoreBoard")) || [] 
+        // let initials = input.value
+    let totalScore= answeredCorrect
+        let scoreBoard = {
+        student: input.value,
+        score: totalScore
+    }
+getStudent.push(scoreBoard)
+
+
+    let userJason = JSON.stringify(getStudent) /* new array */
+    
+        localStorage.setItem("scoreBoard", userJason);
+       
+
+    
+    for (let i=0; i < getStudent.length; i++) {
+        let score = document.createElement("li")
+        score.textContent = "Student: "+ getStudent[i].student + "Score: " + getStudent[i].score
+        highScore.appendChild(score) 
+       
+        
+    }
+    }
 }
 
 
@@ -132,20 +188,19 @@ startBtn.addEventListener("click", () => {
  startBtn.addEventListener("click", () => {
     l3.style.display = 'none';
  })  ;
+ 
+
    
    /* once the event 'click' button is heard then the startTest function is called. */ 
 
 
 function endGame () {
     updateScore() /* once endGame function is triggered updateScore function is called */
-    highScorefunc()
 }
-    function highScorefunc() { /*michael-karen.medium.com */
-        const highScore = JSON.parse(localStorage.getItem(HIGHSCORES)) ?? [];
-        const lowestScore = highScore[highScores-1]?.score ?? 0;
+    
 
     
-};
+
     
 
 

@@ -7,10 +7,6 @@
     ; 
 }
 
-header {
-    background-color: var(--background);
-}
-
 h1 {
 margin-top: 10px;
 margin-left: 300px;
@@ -45,9 +41,6 @@ h3 {
     text-align: center;
 }
    
-section {
-    background-color: var(--background);
-}
 
 button {
     background-color: lightgray;
@@ -56,14 +49,10 @@ button {
    
 }
 
-p {
+form, section, p, input, ul, header {
     background-color: var(--background);
 }
 
-ul {
-    background-color: var(--background);
-   
-}
 
 ol{ 
     background-color: var(--background);
