@@ -43,8 +43,10 @@ let questions = [
 
 let input = document.getElementById("input")
 let submit = document.getElementById("submit")
+let h4 = document.getElementById('h4')
     input.style.display = 'none';
     submit.style.display = 'none';
+    h4.style.display = 'none';
 
 function showQuestions(currentQuestion) {
     // if (questionIndex === questions.length) {
@@ -67,7 +69,7 @@ function showQuestions(currentQuestion) {
     }
 }
    catch (e){
-    console.log("index Out of Range")
+    console.log("")
    }
 }    
      
@@ -133,6 +135,7 @@ function updateScore () {
 
     input.style.display = 'block';
     submit.style.display = 'block';
+    h4.style.display = 'block';
 
     submit.addEventListener("click", highScorefunc)
     event.preventDefault()
@@ -141,8 +144,7 @@ function updateScore () {
         event.preventDefault()
         let input = document.getElementById("input")
         let getStudent = JSON.parse(localStorage.getItem("scoreBoard")) || [] 
-        // let initials = input.value
-    let totalScore= answeredCorrect
+        let totalScore= answeredCorrect
         let scoreBoard = {
         student: input.value,
         score: totalScore
