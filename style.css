@@ -40,6 +40,12 @@ h3 {
     background-color: var(--background);
     text-align: center;
 }
+
+h4 {
+    text-align: center;
+    font-size: 30px;
+
+}
    
 
 button {
